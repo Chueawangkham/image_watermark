@@ -33,7 +33,7 @@ class ImageWatermark {
     ui.BitmapFont? font,
 
     ///Text color
-    Color color = Colors.black,
+    Color? color,
 
     ///Text right justification
     bool rightJustify = false,
@@ -44,11 +44,10 @@ class ImageWatermark {
     ///Add Watermark
     ui.drawString(
       originalImage,
-      font ?? ui.arial_48,
-      dstX,
-      dstY,
       watermarkText,
-      color: color.value,
+      font: font ?? ui.arial48,
+      x: dstX,
+      y: dstY,
       rightJustify: rightJustify,
     );
 
@@ -71,38 +70,38 @@ class ImageWatermark {
   ///   color: //Text color (default black)
   /// );
   /// ```
-  static Future<Uint8List> addTextWatermarkCentered({
-    ///Image converted to Uint8List
-    required Uint8List imgBytes,
+  // static Future<Uint8List> addTextWatermarkCentered({
+  //   ///Image converted to Uint8List
+  //   required Uint8List imgBytes,
 
-    ///The text
-    required String watermarktext,
+  //   ///The text
+  //   required String watermarktext,
 
-    ///Text font type
-    ui.BitmapFont? font,
+  //   ///Text font type
+  //   ui.BitmapFont? font,
 
-    ///Text color (default black)
-    Color color = Colors.black,
-  }) async {
-    ///Original Image
-    final originalImage = ui.decodeImage(imgBytes)!;
+  //   ///Text color (default black)
+  //   Color color = Colors.black,
+  // }) async {
+  //   ///Original Image
+  //   final originalImage = ui.decodeImage(imgBytes)!;
 
-    ///Add Watermark
-    ui.drawStringCentered(
-      originalImage,
-      font ?? ui.arial_48,
-      watermarktext,
-      color: color.value,
-    );
+  //   ///Add Watermark
+  //   ui.drawStringCentered(
+  //     originalImage,
+  //     font ?? ui.arial_48,
+  //     watermarktext,
+  //     color: color.value,
+  //   );
 
-    ///Encode image to PNG
-    final wmImage = ui.encodePng(originalImage);
+  //   ///Encode image to PNG
+  //   final wmImage = ui.encodePng(originalImage);
 
-    ///Get the result
-    final result = Uint8List.fromList(wmImage);
+  //   ///Get the result
+  //   final result = Uint8List.fromList(wmImage);
 
-    return result;
-  }
+  //   return result;
+  // }
 
   ///This method adds the image that is indicated as a watermark,
   ///the parameters are the following:
@@ -116,39 +115,39 @@ class ImageWatermark {
   ///   imgWidth: //Image width (default 100)
   /// );
   /// ```
-  static Future<Uint8List> addImageWatermark({
-    required Uint8List originalImageBytes,
-    required Uint8List waterkmarkImageBytes,
-    int imgHeight = 100,
-    int imgWidth = 100,
-    int dstX = 100,
-    int dstY = 100,
-  }) async {
-    ///Original Image
-    final original = ui.decodeImage(originalImageBytes)!;
+  // static Future<Uint8List> addImageWatermark({
+  //   required Uint8List originalImageBytes,
+  //   required Uint8List waterkmarkImageBytes,
+  //   int imgHeight = 100,
+  //   int imgWidth = 100,
+  //   int dstX = 100,
+  //   int dstY = 100,
+  // }) async {
+  //   ///Original Image
+  //   final original = ui.decodeImage(originalImageBytes)!;
 
-    ///Watermark Image
-    final watermark = ui.decodeImage(waterkmarkImageBytes)!;
+  //   ///Watermark Image
+  //   final watermark = ui.decodeImage(waterkmarkImageBytes)!;
 
-    // add watermark over originalImage
-    // initialize width and height of watermark image
-    final image = ui.Image(imgHeight, imgWidth);
-    ui.drawImage(image, watermark);
+  //   // add watermark over originalImage
+  //   // initialize width and height of watermark image
+  //   final image = ui.Image(imgHeight, imgWidth);
+  //   ui.drawImage(image, watermark);
 
-    // give position to watermark over image
-    ui.copyInto(
-      original,
-      image,
-      dstX: dstX,
-      dstY: dstY,
-    );
+  //   // give position to watermark over image
+  //   ui.copyInto(
+  //     original,
+  //     image,
+  //     dstX: dstX,
+  //     dstY: dstY,
+  //   );
 
-    ///Encode image to PNG
-    final wmImage = ui.encodePng(original);
+  //   ///Encode image to PNG
+  //   final wmImage = ui.encodePng(original);
 
-    ///Get the result
-    final result = Uint8List.fromList(wmImage);
+  //   ///Get the result
+  //   final result = Uint8List.fromList(wmImage);
 
-    return result;
-  }
+  //   return result;
+  // }
 }
